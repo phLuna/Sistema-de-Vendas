@@ -1,12 +1,6 @@
-import datetime, re, sqlalchemy
+import datetime, re, sqlalchemy, validate_docbr
 
-def formatar_cpf(str):
-    """Esta função recebe um cpf, e o formata."""
-    a = re.sub('[^0-9]', '', str)
-    cpf_formatado = f"{a[0]}{a[1]}{a[2]}.{a[3]}{a[4]}{a[5]}.{a[6]}{a[7]}{a[8]}-{a[9]}{a[10]}"
-    return cpf_formatado
-
-def inserir_cpf():
+def inserir_cpf() -> str:
     cpf_rasc = input('CPF: ')
     info = 0
     for n in cpf_rasc:
@@ -26,13 +20,33 @@ def inserir_cpf():
     cpf = formatar_cpf(cpf_rasc)
     return cpf
 
+#Arrumar.
+def validar_cpf(cpf: str) -> str:
+    """Esta função valida cpf's."""
+    if validate_docbr.CPF.validate(cpf):
+      return "Válido"
+    else:
+      return "Inválido"
+
+def formatar_cpf(str: str) -> str:
+    """Esta função recebe um cpf, e o formata."""
+    a = re.sub('[^0-9]', '', str)
+    validade = validar_cpf(a).upper()
+    if validade == 'INVÁLIDO':
+        while True:
+            print('CPF inválido! Tente novamente.')
+            cpf = inserir_cpf()
+    else:
+        cpf_formatado = f"{a[0]}{a[1]}{a[2]}.{a[3]}{a[4]}{a[5]}.{a[6]}{a[7]}{a[8]}-{a[9]}{a[10]}"
+        return cpf_formatado
+
 #Adicionar Creat At.
-def criar_pessoa():
+def criar_pessoa() -> dict:
     """Esta função cria pessoas."""
     nome = input('Nome: ')
     telefone = input('Telefone: ')
     cpf = inserir_cpf()
-    create_at: datetime.date.today()
+    #create_at: datetime.date.today()
     pessoa = {'nome': nome, 'telefone': telefone, 'cpf': cpf}
     return pessoa
 
