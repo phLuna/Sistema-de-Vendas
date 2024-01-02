@@ -1,6 +1,9 @@
 import re, sqlalchemy, validate_docbr
 from datetime import datetime
 
+#-------------------------------------------------------------
+#Criação de pessoas.
+
 
 def inserir_cpf() -> str:
     cpf_rasc = input('CPF: ')
@@ -52,5 +55,18 @@ def criar_pessoa() -> dict:
     pessoa = {'nome': nome, 'telefone': telefone, 'cpf': cpf, 'Create At': create_at}
     return pessoa
 
-a = criar_pessoa()
+#--------------------------------------------------------------------
+#Criação de produtos.
+
+def criar_produto():
+    nome = input('Nome: ')
+    descricao = input('Descrição: ')
+    quantidade = int(input('Quantidade: '))
+    preco = int(input('Preço: '))
+    preco_total = quantidade * preco
+    status = input('Status da entrega: ')
+    produto = {'Nome': nome, 'descricao': descricao, 'quantidade': quantidade, 'preco': preco, 'preco total': preco_total, 'status': status}
+    return produto
+
+a = criar_produto
 print(a)
