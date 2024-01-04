@@ -59,13 +59,14 @@ def criar_pessoa() -> dict:
 #Criação de produtos.
 
 def criar_produto():
+    proprietario = input('Pk: ')
     nome = input('Nome: ')
     descricao = input('Descrição: ')
     quantidade = int(input('Quantidade: '))
     preco = int(input('Preço: '))
     preco_total = quantidade * preco
     status = input('Status da entrega: ')
-    produto = {'Nome': nome, 'descricao': descricao, 'quantidade': quantidade, 'preco': preco, 'preco total': preco_total, 'status': status}
+    produto = {'Proprietario': proprietario, 'Nome': nome, 'Descricao': descricao, 'Quantidade': quantidade, 'Preco': preco, 'Preco total': preco_total, 'Status': status}
     return produto
 
 a = criar_produto
